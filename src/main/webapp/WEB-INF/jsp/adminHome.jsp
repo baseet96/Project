@@ -1,4 +1,4 @@
-<%@ include file="header.jsp"%>
+<%@ include file="adminHeader.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -16,7 +16,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<title>Home</title>
+<title>Admin Home</title>
 </head>
 <body>
 	<div class="container">

@@ -7,23 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.verizon.services.HomeService;
+import com.verizon.services.ShopperHomeService;
 
 @Controller
 @RequestMapping("/")
-public class HomeController {
+public class ShopperHomeController {
 	
 	@Autowired
-	private HomeService homeService;
+	private ShopperHomeService shopperHomeService;
 	
-	@GetMapping("/home")
+	@GetMapping("/shopperhome")
 	public String showHomePage(Model model) {
 		
-		System.out.println("In Home Page");
+		System.out.println("In Shopper Home Page");
 		
-		model.addAttribute("products",homeService.getAllProducts());
+		model.addAttribute("products",shopperHomeService.getAllProducts());
 		
-		return "home";
+		return "shopperHome";
 	}
 	
 	
@@ -32,7 +32,7 @@ public class HomeController {
 		
 		System.out.println("In Product page");
 		
-		model.addAttribute("product",homeService.getProductById(productId));
+		model.addAttribute("product",shopperHomeService.getProductById(productId));
 		
 		return "product";
 	}

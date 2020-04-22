@@ -43,7 +43,7 @@
 							</div>
 							<!-- form-group end.// -->
 							<div class="form-group">
-								<a href="/home" class="btn btn-dark btn-block" role="button">Login</a>
+								<a href="/shopperhome" class="btn btn-dark btn-block" role="button">Login</a>
 							</div>
 							<!-- form-group// -->
 						</form>

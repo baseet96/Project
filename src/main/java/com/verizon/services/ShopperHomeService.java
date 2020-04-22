@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.verizon.models.Product;
 
 @Service
-public class HomeService {
+public class ShopperHomeService {
 
 	public List<Product> getAllProducts() {
 		

@@ -18,7 +18,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<title>Header</title>
+<title>Shopper Header</title>
 </head>
 <body>
 	<div class="container text-center">
@@ -30,7 +30,7 @@
 
 
 		<div class="d-flex flex-grow-1">
-			<a class="navbar-brand" href="/home/">Home</a>
+			<a class="navbar-brand" href="/shopperhome/">Home</a>
 
 			<ul class="navbar-nav">
 				<li class="nav-item"><a class="nav-link" href="#">Products</a>
