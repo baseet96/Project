@@ -39,6 +39,10 @@
 								<label>Email address</label> <input type="email"
 									class="form-control" placeholder="">
 							</div>
+							<div class="form-group">
+								<label>Date of birth</label> <input type="date"
+									class="form-control" placeholder="">
+							</div>
 							<!-- form-group end.// -->
 							<div class="form-group">
 								<label>Account type</label> <label
