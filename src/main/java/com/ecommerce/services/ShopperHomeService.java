@@ -1,4 +1,4 @@
-package com.verizon.services;
+package com.ecommerce.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.function.Predicate;
 
 import org.springframework.stereotype.Service;
 
-import com.verizon.models.Product;
+import com.ecommerce.models.Product;
 
 @Service
 public class ShopperHomeService {

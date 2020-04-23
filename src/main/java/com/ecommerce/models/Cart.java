@@ -1,4 +1,4 @@
-package com.verizon.models;
+package com.ecommerce.models;
 
 public class Cart {
 	
