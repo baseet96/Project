@@ -12,10 +12,10 @@ public class ProductEntity {
     private Integer id;
     private String name;
     private String description;
-    private double price;
-    private double discount;
-    private double deliveryCharges;
-    private int quantityInInventory;
+    private Double price;
+    private Double discount;
+    private Double deliveryCharges;
+    private Integer quantityInInventory;
 
     public Integer getId() {
         return id;
@@ -37,27 +37,27 @@ public class ProductEntity {
         this.quantityInInventory = quantityInInventory;
     }
 
-    public double getDeliveryCharges() {
+    public Double getDeliveryCharges() {
         return deliveryCharges;
     }
 
-    public void setDeliveryCharges(double deliveryCharges) {
+    public void setDeliveryCharges(Double deliveryCharges) {
         this.deliveryCharges = deliveryCharges;
     }
 
-    public double getDiscount() {
+    public Double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
+    public void setDiscount(Double discount) {
         this.discount = discount;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
@@ -71,6 +71,16 @@ public class ProductEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    // Calculate price with disocunt
+    public Double getDisocuntedPrice() {
+        return this.getPrice() - (this.getPrice() * this.getDiscount());
+    }
+
+    // Calculate total price including delivery charges
+    public Double getFinalPrice() {
+        return this.getDisocuntedPrice() + this.getDeliveryCharges();
     }
 
 }
