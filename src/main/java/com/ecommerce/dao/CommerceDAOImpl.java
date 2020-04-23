@@ -1,9 +1,12 @@
 package com.ecommerce.dao;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
 import com.ecommerce.models.User;
 
 public class CommerceDAOImpl implements CommerceDAO {
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
 	
