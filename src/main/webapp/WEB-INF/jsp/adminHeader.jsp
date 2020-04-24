@@ -33,7 +33,7 @@
 			<a class="navbar-brand" href="/adminhome/">Home</a>
 
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">Products</a>
+				<li class="nav-item"><a class="nav-link" href="#">Add Prodcut</a>
 				</li>
 			</ul>
 

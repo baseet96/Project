@@ -6,12 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-public class RegistrationController {
-
-	@GetMapping("/registration")
-	public String showRegistraionPage() {
-		System.out.println("In Registration Page");
+public class AddProductController {
+	
+	@GetMapping("/addProduct")
+	public String showHomePage() {
 		
-		return "registration";
+		System.out.println("In Add Product Page");
+
+		
+		return "addProduct";
 	}
+
 }

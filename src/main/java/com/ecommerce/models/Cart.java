@@ -1,24 +1,30 @@
 package com.ecommerce.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+
+@Entity
 public class Cart {
 	
-	private String id;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private String cartId;
+	
+	@OneToMany
+	@JoinColumn(name = "id")
 	private Product product;
+	
+	
 	private double discount;
 	private double total;
-	public Cart(String id, Product product, double discount, double total) {
-		super();
-		this.id = id;
-		this.product = product;
-		this.discount = discount;
-		this.total = total;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
+
 	public Product getProduct() {
 		return product;
 	}
@@ -37,6 +43,4 @@ public class Cart {
 	public void setTotal(double total) {
 		this.total = total;
 	}
-	
-	
 }
