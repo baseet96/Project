@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ecommerce.services.ShopperHomeService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/shopper")
 public class ShopperHomeController {
 	
 	@Autowired
 	private ShopperHomeService shopperHomeService;
 	
-	@GetMapping("/shopperhome")
+	@GetMapping("/home")
 	public String showHomePage(Model model) {
 		
 		System.out.println("In Shopper Home Page");

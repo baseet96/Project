@@ -19,6 +19,29 @@
 <title>Shopper Home</title>
 </head>
 <body>
+
+
+<div class="row h-100 justify-content-center align-items-center">
+<c:forEach items="${products}" var="product">
+		<div class="card border-light mb-3" style="max-width: 18rem;">
+			<div class="card-header">
+				<u>${product.name}</u>
+			</div>
+			<div class="card-body">
+				<h5 class="card-title">${product.description}</h5>
+			</div>
+			<div class="card-footer bg-transparent text-center">$${product.price}
+			</div>
+			<div class="card-footer bg-transparent text-center">
+				<button type="button" class="btn btn-primary btn-md"
+					onClick="location.href='/shopper/${product.id}' ">Add</button>
+			</div>
+		</div>
+		</c:forEach>
+	</div>
+
+
+
 	<div class="container">
 		<div class="row">
 			<c:forEach items="${products}" var="product">
@@ -30,7 +53,7 @@
 						</div>
 						<div class="panel-footer">
 							<button type="button" class="btn btn-primary btn-md"
-								onClick="location.href='/products/${product.id} ' ">Browse</button>
+								onClick="location.href='/shopper/${product.id} ' ">Browse</button>
 						</div>
 					</div>
 				</div>

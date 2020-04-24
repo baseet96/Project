@@ -1,4 +1,4 @@
-<%@ include file="header.jsp"%>
+<%@ include file="shopperHeader.jsp"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!doctype html>
@@ -17,38 +17,29 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <title>Product</title>
+
 </head>
 <body>
 
-
-	<div class="card border-light mb-3" style="max-width: 18rem;">
-		<div class="card-header">Header</div>
-		<div class="card-body">
-			<h5 class="card-title">Light card title</h5>
-			<p class="card-text">Some quick example text to build on the card
-				title and make up the bulk of the card's content.</p>
-		</div>
-		<div class="card-footer bg-transparent border-success">Footer</div>
-	</div>
-	<div class="container">
-		<div class="row">
-
-			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">${product.name}</div>
-					<div class="panel-body">
-						<p>Description : ${product.description}</p>
-						<p>Price : ${product.price}</p>
-					</div>
-					<div class="panel-footer">
-						<button type="button" class="btn btn-primary btn-md"
-							onClick="location.href=' ' ">Buy</button>
-					</div>
-				</div>
+	<div class="row h-100 justify-content-center align-items-center">
+		<div class="card border-light mb-3" style="max-width: 18rem;">
+			<div class="card-header">
+				<u>${product.name}</u>
 			</div>
-
+			<div class="card-body">
+				<h5 class="card-title">${product.description}</h5>
+				<p class="card-text">Discount: ${product.discount}%</p>
+				<p class="card-text">Delivery: $${product.deliveryCharge}</p>
+				<p class="card-text">Inventory: ${product.inventory}</p>
+			</div>
+			<div class="card-footer bg-transparent text-center">$${product.price}
+			</div>
+			<div class="card-footer bg-transparent text-center">
+				<button type="button" class="btn btn-primary btn-md"
+					onClick="location.href=' ' ">Add</button>
+			</div>
 		</div>
 	</div>
-	<br>
+
 </body>
 </html>
