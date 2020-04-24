@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.ecommerce.services.AdminHomeService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/admin")
 public class AdminHomeController {
 	
 	@Autowired
 	private AdminHomeService adminHomeService;
 	
-	@GetMapping("/adminhome")
+	@GetMapping("/home")
 	public String showHomePage() {
 		
 		System.out.println("In Admin Home Page");

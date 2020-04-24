@@ -30,13 +30,12 @@
 
 
 		<div class="d-flex flex-grow-1">
-			<a class="navbar-brand" href="/shopperhome/">Home</a>
-
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#">Products</a>
+				<li class="nav-item"><a class="nav-link" href="/shopper/home">Home</a>
 				</li>
+				<li class="nav-item"><a class="nav-link"
+					href="#">Products</a></li>
 			</ul>
-
 
 		</div>
 

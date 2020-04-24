@@ -30,7 +30,7 @@
 						</div>
 						<div class="panel-footer">
 							<button type="button" class="btn btn-primary btn-md"
-								onClick="location.href='/products/${product.id} ' ">Browse</button>
+								onClick="location.href='/shopper/${product.id} ' ">Browse</button>
 						</div>
 					</div>
 				</div>

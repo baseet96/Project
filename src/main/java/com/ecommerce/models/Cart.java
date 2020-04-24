@@ -5,6 +5,7 @@
 //import javax.persistence.GenerationType;
 //import javax.persistence.Id;
 //import javax.persistence.JoinColumn;
+//import javax.persistence.ManyToOne;
 //import javax.persistence.OneToMany;
 //
 //import com.ecommerce.entities.ProductEntity;
@@ -19,6 +20,8 @@
 //	private Integer cartId;
 //	
 //	
+//	@ManyToOne
+//    @JoinColumn(name = "id")
 //	private ProductEntity product;
 //	
 //	
