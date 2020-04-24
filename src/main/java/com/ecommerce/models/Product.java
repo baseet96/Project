@@ -82,6 +82,12 @@ public class Product {
 		this.inventory = inventory;
 	}
 
+	@Override
+	public String toString() {
+		return "Product DTO [name=" + name + ", description=" + description + ", price=" + price + ", discount="
+				+ discount + ", delivery charges=" + deliveryCharge + ", inventory=" + inventory + "]";
+	}
+
 	//converts entity Into Model
 	public static Product valueOf(ProductEntity productEntity) {
 		Product product = new Product();
