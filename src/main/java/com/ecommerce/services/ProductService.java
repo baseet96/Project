@@ -22,11 +22,12 @@ public class ProductService {
     ProductRepository productRepository;
 
     // Create a new Product
-    public void createProduct(Product product) {
+    public ProductEntity createProduct(Product product) {
         logger.info("Creating database entry for product {}", product);
         ProductEntity productEntity = product.createEntity();
         productRepository.save(productEntity);
         logger.info("Successfully added product {}", product);
+        return productEntity;
     }
 
     // Returns list of all products

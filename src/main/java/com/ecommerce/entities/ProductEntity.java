@@ -4,17 +4,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class ProductEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
+    @NotNull
     private String name;
     private String description;
+    @NotNull
     private Double price;
     private Double discount;
+    @NotNull
     private Double deliveryCharges;
+    @NotNull
     private Integer quantityInInventory;
 
     public Integer getId() {

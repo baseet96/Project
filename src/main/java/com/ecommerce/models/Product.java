@@ -6,10 +6,10 @@ public class Product {
 	private String id;
 	private String name;
 	private String description;
-	private double price;
-	private double discount;
-	private double deliveryCharge;
-	private int inventory;
+	private Double price;
+	private Double discount;
+	private Double deliveryCharge;
+	private Integer inventory;
 
 	public Product() {
 	};
@@ -50,39 +50,39 @@ public class Product {
 		this.description = description;
 	}
 
-	public double getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
-	public void setPrice(double price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public double getDiscount() {
+	public Double getDiscount() {
 		return discount;
 	}
 
-	public void setDiscount(double discount) {
+	public void setDiscount(Double discount) {
 		this.discount = discount;
 	}
 
-	public double getDeliveryCharge() {
+	public Double getDeliveryCharge() {
 		return deliveryCharge;
 	}
 
-	public void setDeliveryCharge(double deliveryCharge) {
+	public void setDeliveryCharge(Double deliveryCharge) {
 		this.deliveryCharge = deliveryCharge;
 	}
 
-	public int getInventory() {
+	public Integer getInventory() {
 		return inventory;
 	}
 
-	public void setInventory(int inventory) {
+	public void setInventory(Integer inventory) {
 		this.inventory = inventory;
 	}
 
-	//converts entity into Model
+	//converts entity Into Model
 	public static Product valueOf(ProductEntity productEntity) {
 		Product product = new Product();
 		product.setName(productEntity.getName());
@@ -95,7 +95,7 @@ public class Product {
 		return product;
 	}
 
-	//converts model into Entity
+	//converts model Into Entity
 	public ProductEntity createEntity() {
 		ProductEntity productEntity = new ProductEntity();
 		productEntity.setName(this.getName());
