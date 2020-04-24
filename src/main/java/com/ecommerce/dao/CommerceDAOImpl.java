@@ -1,11 +1,15 @@
 package com.ecommerce.dao;
 
 import javax.persistence.EntityManager;
+
 import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
 
 import com.ecommerce.entities.UserEntity;
 import com.ecommerce.models.User;
 
+@Repository(value = "commerceDao")
 public class CommerceDAOImpl implements CommerceDAO {
 
 	@PersistenceContext
