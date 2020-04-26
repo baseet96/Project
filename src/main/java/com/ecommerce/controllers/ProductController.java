@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@CrossOrigin
 @RequestMapping(path = "/products")
 public class ProductController {
 
@@ -65,8 +67,9 @@ public class ProductController {
     // Delete a product passing in id param
 
     @DeleteMapping(path = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public void deleteProduct(@RequestParam Integer id) {
+    public ResponseEntity<Object> deleteProduct(@RequestParam Integer id) {
         productService.deleteProduct(id);
+        return new ResponseEntity<Object>("success: deleted product with id: " + id , HttpStatus.OK);
     }
 
     // Modify a product passing in id param
