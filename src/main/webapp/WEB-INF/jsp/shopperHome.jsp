@@ -25,7 +25,7 @@
 <c:forEach items="${products}" var="product">
 		<div class="card border-light mb-3" style="max-width: 18rem;">
 			<div class="card-header">
-				<u>${product.name}</u>
+				<u>${product.getName()}</u>
 			</div>
 			<div class="card-body">
 				<h5 class="card-title">${product.description}</h5>
