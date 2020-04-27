@@ -69,14 +69,15 @@ public class ProductController {
     @DeleteMapping(path = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> deleteProduct(@RequestParam Integer id) {
         productService.deleteProduct(id);
-        return new ResponseEntity<Object>("success: deleted product with id: " + id , HttpStatus.OK);
+        return new ResponseEntity<Object>("Success: deleted product with id: " + id , HttpStatus.OK);
     }
 
     // Modify a product passing in id param
 
     @PutMapping(path = "/put", produces = MediaType.APPLICATION_JSON_VALUE)
-    public String modifyProduct(@RequestParam Integer id, @RequestBody Product product) {
-        return productService.updateProduct(id, product);
+    public ResponseEntity<Object> modifyProduct(@RequestParam Integer id, @RequestBody Product product) {
+        productService.updateProduct(id, product);
+        return new ResponseEntity<Object>("Success: modified product with id: " + id, HttpStatus.OK);
     }
 
 }
