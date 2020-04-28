@@ -15,12 +15,57 @@ class ProjectApplicationTests {
 	@Autowired
 	private AuthController authController;
 	
-	@Autowired ProductController productController;
+	@Autowired 
+	private ProductController productController;
 
 	@Test
 	public void contexLoads() throws Exception {
 		assertNotNull(authController);
 		assertNotNull(productController);
 	}
-
+	
+	@Test 
+	public void registersUser() throws Exception {
+		
+	}
+	
+	@Test 
+	public void logsUserIn() throws Exception {
+		
+	}
+	
+	@Test 
+	public void loginAdmin() throws Exception {
+		
+	}
+	
+	@Test
+	public void loginCustomer() throws Exception {
+		
+	}
+	
+	@Test
+	public void getsUser() throws Exception {
+		
+	}
+	
+	@Test
+	public void modifiesProduct() throws Exception {
+		
+	}
+	
+	@Test
+	public void addsProduct() throws Exception {
+		
+	}
+	
+	@Test
+	public void deletesProduct() throws Exception {
+		
+	}
+	
+	@Test
+	public void getsProducts() throws Exception {
+		
+	}
 }
