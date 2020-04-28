@@ -7,15 +7,23 @@ import com.ecommerce.entities.ProductEntity;
 import com.ecommerce.entities.UserEntity;
 
 public class Cart {
-
     private Integer id;
-
     private List<ProductEntity> products;
-
     private UserEntity user;
-
     private double discount;
     private double total;
+
+    public Cart() {
+    }
+
+    public Cart(Integer id, List<ProductEntity> products, UserEntity user, double discount, double total) {
+        super();
+        this.id = id;
+        this.products = products;
+        this.user = user;
+        this.discount = discount;
+        this.total = total;
+    }
 
     public Integer getCartId() {
         return id;

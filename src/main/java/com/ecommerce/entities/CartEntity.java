@@ -15,17 +15,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "carts")
 public class CartEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-
     @ManyToMany(targetEntity = ProductEntity.class)
     private List<ProductEntity> products = new ArrayList<ProductEntity>();
-
     @OneToOne
     private UserEntity user;
-
     private double discount;
     private double total;
 
