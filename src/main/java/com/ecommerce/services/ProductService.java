@@ -117,7 +117,7 @@ public class ProductService {
         if (productEntity.isPresent() == false) {
             return "No product with given id exists";
         }
-        logger.info("Updtaing database entry for product with id {}", id);
+        logger.info("Updating database entry for product with id {}", id);
         ProductEntity updatedProductEntity = product.createEntity();
         updatedProductEntity.setId(id);
         productRepository.save(updatedProductEntity);
