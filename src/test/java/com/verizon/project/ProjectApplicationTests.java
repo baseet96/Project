@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
@@ -19,7 +18,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import com.ecommerce.controllers.AuthController;
 import com.ecommerce.controllers.ProductController;
 import com.ecommerce.dao.CommerceDAO;
-import com.ecommerce.dao.CommerceDAOImpl;
 import com.ecommerce.models.User;
 import com.ecommerce.models.UserKind;
 import com.ecommerce.services.AuthService;
