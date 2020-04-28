@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
 	}
 	
 	@Override
-	public void registerUser(User user) throws Exception {
+	public String registerUser(User user) throws Exception {
 		
 		if (commerceDAO.getUser(user.getEmail()) != null ) {
 			logger.info("Service.USER_ALREADY_EXISTS", " exception thrown");
@@ -45,5 +45,7 @@ public class AuthServiceImpl implements AuthService {
 		}
 		
 		commerceDAO.registerUser(user);
+		
+		return "SUCCESS";
 	}
 }
