@@ -8,7 +8,7 @@ import com.ecommerce.entities.UserEntity;
 
 public class Cart {
 
-    private Integer cartId;
+    private Integer id;
 
     private List<ProductEntity> products;
 
@@ -18,11 +18,11 @@ public class Cart {
     private double total;
 
     public Integer getCartId() {
-        return cartId;
+        return id;
     }
 
-    public void setCartId(Integer cartId) {
-        this.cartId = cartId;
+    public void setCartId(Integer id) {
+        this.id = id;
     }
 
     public List<ProductEntity> getProducts() {

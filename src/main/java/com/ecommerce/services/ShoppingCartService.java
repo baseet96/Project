@@ -35,19 +35,20 @@ public class ShoppingCartService {
     }
 
     // Add product to an existing cart
-    public Cart addProduct(Cart cart, Product product) throws Exception {
-        logger.info("Adding product {} to cart {}", product, cart);
-        Optional<CartEntity> cartEntity = shoppingCartRepository.findById(cart.getCartId());
-        if (cartEntity.isPresent() == false) {
-            logger.info("Service.INVALID_CART_ID", " exception thrown");
-            throw new Exception("Service.INVALID_CART_ID");
-        }
-        List<ProductEntity> currentProducts = cart.getProducts();
-        currentProducts.add(product.createEntity());
-        CartEntity newCartEntity = cart.createEntity();
-        CartEntity updatedCartEntity = shoppingCartRepository.save(newCartEntity);
-        logger.info("Successfully added product {} to cart {}", product, cart);
-        return Cart.valueOf(updatedCartEntity);
-    }
+    // public Cart addProduct(Integer cartID, Integer productID) throws Exception {
+    //     logger.info("Adding product {} to cart {}", productID, cartID);
+    //     Optional<CartEntity> cartEntityExists = shoppingCartRepository.findById(cartID);
+    //     if (cartEntityExists.isPresent() == false) {
+    //         logger.info("Service.INVALID_CART_ID", " exception thrown");
+    //         throw new Exception("Service.INVALID_CART_ID");
+    //     }
+    //     CartEntity cartEntity = cartEntityExists.get();
+    //     List<ProductEntity> currentProducts = cartEntity.getProducts();
+    //     currentProducts.add(product.createEntity());
+    //     CartEntity newCartEntity = cart.createEntity();
+    //     CartEntity updatedCartEntity = shoppingCartRepository.save(newCartEntity);
+    //     logger.info("Successfully added product {} to cart {}", product, cart);
+    //     return Cart.valueOf(updatedCartEntity);
+    // }
     
 }

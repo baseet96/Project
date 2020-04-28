@@ -30,6 +30,7 @@ public class ShoppingCartController {
     @Autowired
     Environment environment;
 
+    // Create new cart
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cart> createNewCart(@RequestBody Cart cart) {
         logger.info("Creation request for cart {}", cart);
@@ -37,5 +38,14 @@ public class ShoppingCartController {
         logger.info(environment.getProperty("Controller.ADDED_NEW_CART"));
         return new ResponseEntity<Cart>(newCart, HttpStatus.CREATED);
     }
+
+    // Add product to existing cart
+    // @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    // public ResponseEntity<Cart> createNewCart(@RequestBody Cart cart) {
+    //     logger.info("Creation request for cart {}", cart);
+    //     Cart newCart = shoppingCartService.createCart(cart);
+    //     logger.info(environment.getProperty("Controller.ADDED_NEW_CART"));
+    //     return new ResponseEntity<Cart>(newCart, HttpStatus.CREATED);
+    // }
 
 }

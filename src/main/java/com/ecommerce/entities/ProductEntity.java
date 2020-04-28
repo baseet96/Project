@@ -88,14 +88,6 @@ public class ProductEntity {
         this.name = name;
     }
 
-    public List<CartEntity> getCarts() {
-        return carts;
-    }
-
-    public void setProduct(List<CartEntity> carts) {
-        this.carts = carts;
-    }
-
     // Calculate price with disocunt
     public Double getDisocuntedPrice() {
         return this.getPrice() - (this.getPrice() * this.getDiscount());

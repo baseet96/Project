@@ -18,7 +18,7 @@ public class CartEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer cartId;
+    private Integer id;
 
     @ManyToMany(targetEntity = ProductEntity.class)
     private List<ProductEntity> products = new ArrayList<ProductEntity>();
@@ -29,12 +29,12 @@ public class CartEntity {
     private double discount;
     private double total;
 
-    public Integer getCartId() {
-        return cartId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setCartId(Integer cartId) {
-        this.cartId = cartId;
+    public void setCartId(Integer id) {
+        this.id = id;
     }
 
     public List<ProductEntity> getProducts() {
