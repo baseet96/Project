@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service(value = "shoppingCartService")
-@Transactional
 public class ShoppingCartService {
 
     @Autowired

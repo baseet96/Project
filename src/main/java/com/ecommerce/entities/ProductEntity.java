@@ -1,9 +1,14 @@
 package com.ecommerce.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -23,6 +28,9 @@ public class ProductEntity {
     private Double deliveryCharges;
     @NotNull
     private Integer quantityInInventory;
+
+    @ManyToMany(targetEntity = CartEntity.class, mappedBy = "products")
+    private List<CartEntity> carts = new ArrayList<CartEntity>();
 
     public Integer getId() {
         return id;
@@ -78,6 +86,14 @@ public class ProductEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<CartEntity> getCarts() {
+        return carts;
+    }
+
+    public void setProduct(List<CartEntity> carts) {
+        this.carts = carts;
     }
 
     // Calculate price with disocunt
