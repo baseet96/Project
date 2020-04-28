@@ -25,6 +25,7 @@ import com.ecommerce.services.AuthServiceImpl;
 
 
 @RunWith(SpringRunner.class)
+// @SpringBootTest
 class ProjectApplicationTests {
 	
 	@Autowired
