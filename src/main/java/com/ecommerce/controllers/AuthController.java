@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecommerce.models.LoginForm;
-import com.ecommerce.models.Product;
 import com.ecommerce.models.User;
 import com.ecommerce.models.UserKind;
 import com.ecommerce.services.AuthService;
-import com.ecommerce.services.ProductService;
 
 @RestController
 @RequestMapping("/")
