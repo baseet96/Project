@@ -78,8 +78,38 @@ class ProjectApplicationTests {
 	}
 	
 	@Test 
-	public void invalidLogin() throws Exception {
-		
+	public void invalidLoginCredentials() throws Exception {
+		String email = "customer@infosys.com";
+		expectedException.expect(Exception.class);
+		expectedException.expectMessage("Service.INVALID_CREDENTIALS");
+		User fromDao = new User();
+		fromDao.setEmail(email);
+		fromDao.setName("Bill Billiams");
+		fromDao.setKind(UserKind.CUSTOMER);
+		fromDao.setDob(this.ft.parse("1990-01-01"));
+		when(commerceDao.getUser("customer@infosys.com")).thenReturn(fromDao);
+		when(commerceDao.loginUser("customer@infosys.com", "password")).thenReturn(fromDao);
+		String invalidPassword = "pass";
+		authService.loginUser(email, invalidPassword);
+	}
+	
+	@Test 
+	public void invalidLoginUsername() throws Exception {
+		expectedException.expect(Exception.class);
+		expectedException.expectMessage("Service.USER_DOES_NOT_EXISTS");
+		String email = "customer@infosys.com";
+		String password = "password";
+		expectedException.expect(Exception.class);
+		expectedException.expectMessage("Service.INVALID_CREDENTIALS");
+		User fromDao = new User();
+		fromDao.setEmail(email);
+		fromDao.setName("Bill Billiams");
+		fromDao.setKind(UserKind.CUSTOMER);
+		fromDao.setDob(this.ft.parse("1990-01-01"));
+		when(commerceDao.getUser("customer@infosys.com")).thenReturn(fromDao);
+		when(commerceDao.loginUser("customer@infosys.com", "password")).thenReturn(fromDao);
+		String invalidEmail = "consumer35";
+		authService.loginUser(invalidEmail, password);
 	}
 	
 	@Test 
