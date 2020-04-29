@@ -50,7 +50,7 @@ public class ShoppingCartService {
         return quantityMap;
     }
 
-    // Create a new Cart with products
+    // Create a new Cart with a product
     // Assumes quantity of product is 1
     public Cart createCart(Cart cart) throws Exception {
         logger.info("Creating database entry for cart {}", cart);

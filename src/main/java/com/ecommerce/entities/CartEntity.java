@@ -26,7 +26,7 @@ public class CartEntity {
     private Integer id;
     @ManyToMany(targetEntity = ProductEntity.class)
     private List<ProductEntity> products = new ArrayList<ProductEntity>();
-    @OneToOne
+    @OneToOne(optional = false)
     private UserEntity user;
     private double discount;
     private double total;
