@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service(value = "shoppingCartService")
+@Transactional
 public class ShoppingCartService {
 
     @Autowired
@@ -28,9 +29,22 @@ public class ShoppingCartService {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    // Calculate total price
+    private double calculatePrice(Cart cart) {
+        double price = 0;
+        for (ProductEntity product : cart.getProducts()) {
+            price += product.getFinalPrice();
+        }
+        if (cart.getDiscount() == 0) {
+            return price;
+        }
+        return price - (price * cart.getDiscount());
+    }
+
     // Create a new Cart with products
     public Cart createCart(Cart cart) {
         logger.info("Creating database entry for cart {}", cart);
+        cart.setTotal(calculatePrice(cart));
         CartEntity cartEntity = cart.createEntity();
         CartEntity newCartEntity = shoppingCartRepository.save(cartEntity);
         logger.info("Successfully added cart {}", cart);
@@ -49,6 +63,7 @@ public class ShoppingCartService {
         List productEntityList = new ArrayList<ProductEntity>();
         productEntityList.add(productEntity);
         cart.setProduct(productEntityList);
+        cart.setTotal(calculatePrice(cart));
         CartEntity cartEntity = cart.createEntity();
         CartEntity newCartEntity = shoppingCartRepository.save(cartEntity);
         logger.info("Successfully added cart {}", cart);

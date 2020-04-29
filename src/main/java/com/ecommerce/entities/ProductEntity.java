@@ -28,7 +28,6 @@ public class ProductEntity {
     private Double deliveryCharges;
     @NotNull
     private Integer quantityInInventory;
-
     @ManyToMany(targetEntity = CartEntity.class, mappedBy = "products")
     private List<CartEntity> carts = new ArrayList<CartEntity>();
 
