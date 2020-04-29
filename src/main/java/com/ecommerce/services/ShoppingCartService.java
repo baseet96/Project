@@ -1,7 +1,9 @@
 package com.ecommerce.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.ecommerce.entities.CartEntity;
@@ -41,20 +43,39 @@ public class ShoppingCartService {
         return price - (price * cart.getDiscount());
     }
 
+    // Set product quantity
+    private Map<Integer, Integer> setQuantity(Integer productId, int quantity) {
+        Map<Integer, Integer> quantityMap = new HashMap<Integer, Integer>();
+        quantityMap.put(productId, quantity);
+        return quantityMap;
+    }
+
     // Create a new Cart with products
-    public Cart createCart(Cart cart) {
+    // Assumes quantity of product is 1
+    public Cart createCart(Cart cart) throws Exception {
         logger.info("Creating database entry for cart {}", cart);
         cart.setTotal(calculatePrice(cart));
         CartEntity cartEntity = cart.createEntity();
+        ProductEntity product = cart.getProducts().get(0);
+        Optional<ProductEntity> productExists = productService.getProductById(product.getId());
+        // Check that product is valid
+        if (productExists.isPresent() == false) {
+            logger.info("Service.INVALID_PRODUCT_ID", " exception thrown");
+            throw new Exception("Service.INVALID_PRODUCT_ID");
+        }
+        // set quantity for product
+        cartEntity.setQuantity(setQuantity(product.getId(), 1));
         CartEntity newCartEntity = shoppingCartRepository.save(cartEntity);
         logger.info("Successfully added cart {}", cart);
         return Cart.valueOf(newCartEntity);
     }
 
     // Create a new cart with product id as a parmaeter
+    // Assumes quantity of product is 1
     public Cart createCart(Cart cart, Integer productId) throws Exception {
         logger.info("Creating database entry for cart {}", cart);
         Optional<ProductEntity> productExists = productService.getProductById(productId);
+        // Check that product is valid
         if (productExists.isPresent() == false) {
             logger.info("Service.INVALID_PRODUCT_ID", " exception thrown");
             throw new Exception("Service.INVALID_PRODUCT_ID");
@@ -65,6 +86,7 @@ public class ShoppingCartService {
         cart.setProduct(productEntityList);
         cart.setTotal(calculatePrice(cart));
         CartEntity cartEntity = cart.createEntity();
+        cartEntity.setQuantity(setQuantity(productEntity.getId(), 1));
         CartEntity newCartEntity = shoppingCartRepository.save(cartEntity);
         logger.info("Successfully added cart {}", cart);
         return Cart.valueOf(newCartEntity);
