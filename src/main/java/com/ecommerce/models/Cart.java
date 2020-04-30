@@ -25,11 +25,11 @@ public class Cart {
         this.total = total;
     }
 
-    public Integer getCartId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setCartId(Integer id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -74,6 +74,7 @@ public class Cart {
     // converts entity Into Model
     public static Cart valueOf(CartEntity cartEntity) {
         Cart cart = new Cart();
+        cart.setId(cartEntity.getId());
         cart.setProduct(cartEntity.getProducts());
         cart.setUser(cartEntity.getUser());
         cart.setDiscount(cartEntity.getDiscount());
