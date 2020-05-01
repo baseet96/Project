@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 @CrossOrigin
@@ -38,15 +38,17 @@ public class ShoppingCartController {
     Environment environment;
 
     // Create new cart passing in a Cart Object in the body
-    // Optional query param "productId" as a product id to create cart with corresponding product as a product in cart
-    // Otherwise pass the full Product Object in the Cart Object 
+    // Optional query param "productId" as a product id to create cart with
+    // corresponding product as a product in cart
+    // Otherwise pass the full Product Object in the Cart Object
 
     @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cart> createNewCart(@RequestBody Cart cart, @RequestParam Map<String, String> queryParameters) throws Exception {
+    public ResponseEntity<Cart> createNewCart(@RequestBody Cart cart, @RequestParam Map<String, String> queryParameters)
+            throws Exception {
         logger.info("Creation request for cart {}", cart);
         String productId = queryParameters.get("productId");
         Cart newCart = null;
-        if (productId == null) { 
+        if (productId == null) {
             newCart = shoppingCartService.createCart(cart);
         } else {
             Integer productIdValue = Integer.valueOf(productId);
@@ -70,13 +72,22 @@ public class ShoppingCartController {
         return new ResponseEntity<Object>("Success: deleted cart with id: " + id, HttpStatus.OK);
     }
 
-    // Add product to existing cart
-    // @PostMapping(path = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    // public ResponseEntity<Cart> createNewCart(@RequestBody Cart cart) {
-    //     logger.info("Creation request for cart {}", cart);
-    //     Cart newCart = shoppingCartService.createCart(cart);
-    //     logger.info(environment.getProperty("Controller.ADDED_NEW_CART"));
-    //     return new ResponseEntity<Cart>(newCart, HttpStatus.CREATED);
-    // }
+    /**
+     * Adds a product to existing shopping cart, and updates existing product in cart. Return the updated shopping cart.
+     *
+     * @param cartId    the cart ID.
+     * @param productId the product ID.
+     * @param quantity  the product quantity to add to cart (the final number - if removing from cart then subtract from 
+     *                  current quantity before sending).
+     * @throws Exception
+     */
+    @PutMapping(path = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Cart> addProduct(@RequestParam Integer cartId, @RequestParam Integer productId,
+            @RequestParam Integer quantity) throws Exception {
+        logger.info("Add product request for product {} to cart {}", productId, cartId);
+        Cart cart = shoppingCartService.addProduct(cartId, productId, quantity);
+        logger.info(environment.getProperty("Controller.ADDED_NEW_CART"));
+        return new ResponseEntity<Cart>(cart, HttpStatus.OK);
+    }
 
 }
