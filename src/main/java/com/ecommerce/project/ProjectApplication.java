@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -27,7 +29,7 @@ public class ProjectApplication {
 		@Autowired
 		public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
 			auth.inMemoryAuthentication()
-				.withUser("user").password("password").roles("USER")
+				.withUser("customer@infosys.com").password("password").roles("USER")
 			.and()
 				.withUser("admin").password("admin").roles("USER", "ADMIN", "READER", "WRITER");
 		}
@@ -38,8 +40,10 @@ public class ProjectApplication {
 	    		.httpBasic()
 	    	.and()
 	        	.authorizeRequests()
-	        	.antMatchers("/index.html", "/", "/home", "/login").permitAll()
-	        	.anyRequest().authenticated();
+	        		.antMatchers("/index.html", "/", "/home", "/login", "/shopper/home", "/registration").permitAll()
+	        		.anyRequest().authenticated();
 	    }
+		
+		
 	}
 }
