@@ -1,5 +1,7 @@
 package com.ecommerce.controllers;
 
+import java.security.Principal;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,5 +77,10 @@ public class AuthController {
 			return e.getMessage();
 		}
     }
+	
+	@RequestMapping("/user")
+	public Principal user(Principal user) {
+		return user;
+	}
 
 }
