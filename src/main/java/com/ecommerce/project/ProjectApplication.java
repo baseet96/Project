@@ -43,7 +43,5 @@ public class ProjectApplication {
 	        		.antMatchers("/index.html", "/", "/home", "/login", "/shopper/home", "/registration").permitAll()
 	        		.anyRequest().authenticated();
 	    }
-		
-		
 	}
 }
