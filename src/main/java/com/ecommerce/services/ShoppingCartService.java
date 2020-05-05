@@ -127,6 +127,17 @@ public class ShoppingCartService {
         return shoppingCartRepository.findAll();
     }
 
+    // Get cart by id
+    public CartEntity getCartById(Integer id) throws Exception {
+        logger.info("Retrieving info for cart with id {}", id);
+        Optional<CartEntity> product = shoppingCartRepository.findById(id);
+        if (product.isPresent() == false) {
+            logger.info("Service.INVALID_CART_ID", " exception thrown");
+            throw new Exception("Service.INVALID_CART_ID");
+        }
+        return product.get();
+    }
+
     // Delete a Cart
     public void deleteCart(Integer id) {
         logger.info("Deleting cart with id {}", id);

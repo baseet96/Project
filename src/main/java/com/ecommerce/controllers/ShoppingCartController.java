@@ -60,14 +60,21 @@ public class ShoppingCartController {
 
     // Get all carts
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Iterable<CartEntity> getAllProducts() {
+    public @ResponseBody Iterable<CartEntity> getAllCarts() {
         return shoppingCartService.getAllCarts();
+    }
+
+    // Get a Cart by ID
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CartEntity> getCartById(@RequestParam Integer id) throws Exception {
+        logger.info("Retrieval request for cart id {}", id);
+        return new ResponseEntity<CartEntity>(shoppingCartService.getCartById(id), HttpStatus.OK);
     }
 
     // Delete a product passing in id param
 
     @DeleteMapping(path = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> deleteProduct(@RequestParam Integer id) {
+    public ResponseEntity<Object> deleteCart(@RequestParam Integer id) {
         shoppingCartService.deleteCart(id);
         return new ResponseEntity<Object>("Success: deleted cart with id: " + id, HttpStatus.OK);
     }
