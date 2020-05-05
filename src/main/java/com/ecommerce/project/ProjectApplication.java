@@ -1,17 +1,20 @@
 package com.ecommerce.project;
 
+import java.util.Arrays;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.autoconfigure.security.SecurityProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @SpringBootApplication
 @EnableJpaRepositories("com.*")
@@ -39,9 +42,21 @@ public class ProjectApplication {
 	    	http
 	    		.httpBasic()
 	    	.and()
+	    		.cors()
+	    	.and()
 	        	.authorizeRequests()
-	        		.antMatchers("/index.html", "/", "/home", "/login", "/shopper/home", "/registration").permitAll()
+	        		.antMatchers("http://localhost:4200/index.html", "http://localhost:4200/", "http://localhost:4200/home", "http://localhost:4200/login", "http://localhost:4200/shopper/home", "http://localhost:4200/registration").permitAll()
 	        		.anyRequest().authenticated();
 	    }
+		
+		@Bean
+		CorsConfigurationSource corsConfigurationSource() {
+			CorsConfiguration configuration = new CorsConfiguration();
+			configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+			configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+			source.registerCorsConfiguration("/**", configuration);
+			return source;
+		}
 	}
 }
