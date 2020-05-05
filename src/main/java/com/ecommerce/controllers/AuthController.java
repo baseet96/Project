@@ -28,7 +28,7 @@ import com.ecommerce.services.AuthService;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/")
+@RequestMapping("/auth")
 public class AuthController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());

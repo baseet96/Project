@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -45,8 +46,18 @@ public class ProjectApplication {
 	    		.cors()
 	    	.and()
 	        	.authorizeRequests()
-	        		.antMatchers("http://localhost:4200/index.html", "http://localhost:4200/", "http://localhost:4200/home", "http://localhost:4200/login", "http://localhost:4200/shopper/home", "http://localhost:4200/registration").permitAll()
+	        		.antMatchers(
+        				"/index.html", 
+        				"/", 
+        				"**/home", 
+        				"**/login", 
+        				"**/shopper/home", 
+        				"**/registration"
+	        		).permitAll()
+	        		.antMatchers(HttpMethod.GET, "/auth/user/", "/products/all").permitAll()
+	                .antMatchers(HttpMethod.POST, "/auth/register-user").permitAll()
 	        		.anyRequest().authenticated();
+	    	
 	    }
 		
 		@Bean
