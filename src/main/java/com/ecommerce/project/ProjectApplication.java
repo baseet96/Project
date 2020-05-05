@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -27,8 +28,8 @@ public class ProjectApplication {
 		SpringApplication.run(ProjectApplication.class, args);
 	}
 
-	@Configuration
-	public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+	@EnableWebSecurity
+	public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		@Autowired
 		public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
@@ -54,8 +55,8 @@ public class ProjectApplication {
         				"**/shopper/home", 
         				"**/registration"
 	        		).permitAll()
-	        		.antMatchers(HttpMethod.GET, "/auth/user/", "/products/all").permitAll()
-	                .antMatchers(HttpMethod.POST, "/auth/register-user").permitAll()
+	        		.antMatchers(HttpMethod.GET, "/auth/**", "/products/all/").permitAll()
+	                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
 	        		.anyRequest().authenticated();
 	    	
 	    }
