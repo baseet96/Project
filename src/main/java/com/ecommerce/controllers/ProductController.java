@@ -25,7 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600,
+	allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 @RequestMapping(path = "/products")
 public class ProductController {
 
