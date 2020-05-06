@@ -146,7 +146,7 @@ public class ShoppingCartService {
     }
 
     // Add product to an existing cart
-    // And add quantity of product already in cart
+    // And change quantity of product already in cart
     public Cart addProduct(Integer cartID, Integer productID, Integer quantity) throws Exception {
         logger.info("Adding product {} to cart {}", productID, cartID);
         Optional<CartEntity> cartEntityExists = shoppingCartRepository.findById(cartID);
@@ -179,6 +179,12 @@ public class ShoppingCartService {
         }
         cartEntity.setQuantity(addProductQuantity(quantityMap, productID, quantity));
         cartEntity.setTotal(updatePrice(cartEntity));
+
+        // Remove product from cart product list if qauntity in cart is 0
+        if (quantity <= 0) {
+            currentProducts.remove(product);
+            cartEntity.setProduct(currentProducts);
+        }
         CartEntity updatedCartEntity = shoppingCartRepository.save(cartEntity);
         logger.info("Successfully added product {} to cart {}", productID, cartID);
         return Cart.valueOf(updatedCartEntity);

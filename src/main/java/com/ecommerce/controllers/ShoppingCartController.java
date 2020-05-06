@@ -71,7 +71,7 @@ public class ShoppingCartController {
         return new ResponseEntity<CartEntity>(shoppingCartService.getCartById(id), HttpStatus.OK);
     }
 
-    // Delete a product passing in id param
+    // Delete a cart passing in id param
 
     @DeleteMapping(path = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Object> deleteCart(@RequestParam Integer id) {
