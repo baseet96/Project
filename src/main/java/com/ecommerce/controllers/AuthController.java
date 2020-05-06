@@ -1,6 +1,10 @@
 package com.ecommerce.controllers;
 
 import java.security.Principal;
+import java.util.Collections;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +31,8 @@ import com.ecommerce.models.UserKind;
 import com.ecommerce.services.AuthService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", maxAge = 3600,
+	allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
 @RequestMapping("/auth")
 public class AuthController {
 	
@@ -82,5 +87,9 @@ public class AuthController {
 	public Principal user(Principal user) {
 		return user;
 	}
-
+	
+	@RequestMapping("/token")
+	public Map<String,String> token(HttpSession session) {
+	    return Collections.singletonMap("token", session.getId());
+	}
 }
