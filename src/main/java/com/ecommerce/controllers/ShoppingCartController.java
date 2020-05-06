@@ -89,12 +89,12 @@ public class ShoppingCartController {
      * @throws Exception
      */
     @PutMapping(path = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cart> addProduct(@RequestParam Integer cartId, @RequestParam Integer productId,
+    public ResponseEntity<CartEntity> addProduct(@RequestParam Integer cartId, @RequestParam Integer productId,
             @RequestParam Integer quantity) throws Exception {
         logger.info("Add product request for product {} to cart {}", productId, cartId);
-        Cart cart = shoppingCartService.addProduct(cartId, productId, quantity);
+        CartEntity cart = shoppingCartService.addProduct(cartId, productId, quantity);
         logger.info(environment.getProperty("Controller.ADDED_NEW_CART"));
-        return new ResponseEntity<Cart>(cart, HttpStatus.OK);
+        return new ResponseEntity<CartEntity>(cart, HttpStatus.OK);
     }
 
 }
