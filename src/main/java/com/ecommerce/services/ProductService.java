@@ -106,24 +106,27 @@ public class ProductService {
     }
 
     // Delete Product
-    public void deleteProduct(Integer id) {
+    public Product deleteProduct(Integer id) {
         logger.info("Deleting product with id {}", id);
+        ProductEntity productEntity = productRepository.getOne(id);
+        Product product = Product.valueOf(productEntity);
         productRepository.deleteById(id);
         logger.info("Successfully deleted product with id {}", id);
+        return product;
     }
     
     // Update Product
-    public String updateProduct(Integer id, Product product) {
+    public ProductEntity updateProduct(Integer id, Product product) throws Exception {
         logger.info("Updating product with id {}", id);
         Optional<ProductEntity> productEntity = productRepository.findById(id);
         if (productEntity.isPresent() == false) {
-            return "No product with given id exists";
+            logger.info("Service.INVALID_PRODUCT_ID", " exception thrown");
+            throw new Exception("Service.INVALID_PRODUCT_ID");
         }
         logger.info("Updating database entry for product with id {}", id);
         ProductEntity updatedProductEntity = product.createEntity();
         updatedProductEntity.setId(id);
-        productRepository.save(updatedProductEntity);
-        return "Updated product with id {}, id";
+        return productRepository.save(updatedProductEntity);
     }
 
 }

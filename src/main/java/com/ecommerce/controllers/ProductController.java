@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600,
-	allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token"})
+	allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token", "content-type"})
 @RequestMapping(path = "/products")
 public class ProductController {
 
@@ -69,17 +69,17 @@ public class ProductController {
     // Delete a product passing in id param
 
     @DeleteMapping(path = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> deleteProduct(@RequestParam Integer id) {
-        productService.deleteProduct(id);
-        return new ResponseEntity<Object>("Success: deleted product with id: " + id , HttpStatus.OK);
+    public @ResponseBody Product deleteProduct(@RequestParam Integer id) {
+        Product product = productService.deleteProduct(id);
+        return product;
     }
 
     // Modify a product passing in id param
 
-    @PutMapping(path = "/put", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> modifyProduct(@RequestParam Integer id, @RequestBody Product product) {
-        productService.updateProduct(id, product);
-        return new ResponseEntity<Object>("Success: modified product with id: " + id, HttpStatus.OK);
+    @PutMapping(path = "/put", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ProductEntity modifyProduct(@RequestParam Integer id, @RequestBody Product product)
+            throws Exception {
+        return productService.updateProduct(id, product);
     }
 
 }
