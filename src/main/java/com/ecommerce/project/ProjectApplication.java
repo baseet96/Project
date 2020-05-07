@@ -1,6 +1,7 @@
 package com.ecommerce.project;
 
 import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,12 +9,14 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -41,6 +44,7 @@ public class ProjectApplication {
 		
 		@Override
 	    protected void configure(HttpSecurity http) throws Exception {
+			/*
 	    	http
 	    		.httpBasic()
 	    	.and()
@@ -50,25 +54,26 @@ public class ProjectApplication {
 	        		.antMatchers(
         				"/index.html", 
         				"/", 
-        				"**/home", 
-        				"**/login", 
-        				"**/shopper/home", 
-        				"**/registration"
+        				"/home",
+        				"/login", 
+        				"/shopper/home", 
+        				"/registration"
 	        		).permitAll()
 	        		.antMatchers(HttpMethod.GET, "/auth/**", "/products/all/").permitAll()
 	                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
-	        		.anyRequest().authenticated();
+	        		.anyRequest().authenticated()
+	    	.and().csrf()
+	        	.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+	       */
 	    	
+			http.cors().and().authorizeRequests()
+		    	.anyRequest().authenticated();
 	    }
 		
+		
 		@Bean
-		CorsConfigurationSource corsConfigurationSource() {
-			CorsConfiguration configuration = new CorsConfiguration();
-			configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
-			configuration.setAllowedMethods(Arrays.asList("GET","POST"));
-			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-			source.registerCorsConfiguration("/**", configuration);
-			return source;
+		HeaderHttpSessionStrategy sessionStrategy() {
+			return new HeaderHttpSessionStrategy();
 		}
 	}
 }

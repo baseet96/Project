@@ -60,14 +60,21 @@ public class ShoppingCartController {
 
     // Get all carts
     @GetMapping(path = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody Iterable<CartEntity> getAllProducts() {
+    public @ResponseBody Iterable<CartEntity> getAllCarts() {
         return shoppingCartService.getAllCarts();
     }
 
-    // Delete a product passing in id param
+    // Get a Cart by ID
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<CartEntity> getCartById(@RequestParam Integer id) throws Exception {
+        logger.info("Retrieval request for cart id {}", id);
+        return new ResponseEntity<CartEntity>(shoppingCartService.getCartById(id), HttpStatus.OK);
+    }
+
+    // Delete a cart passing in id param
 
     @DeleteMapping(path = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Object> deleteProduct(@RequestParam Integer id) {
+    public ResponseEntity<Object> deleteCart(@RequestParam Integer id) {
         shoppingCartService.deleteCart(id);
         return new ResponseEntity<Object>("Success: deleted cart with id: " + id, HttpStatus.OK);
     }
@@ -82,12 +89,12 @@ public class ShoppingCartController {
      * @throws Exception
      */
     @PutMapping(path = "/product", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Cart> addProduct(@RequestParam Integer cartId, @RequestParam Integer productId,
+    public ResponseEntity<CartEntity> addProduct(@RequestParam Integer cartId, @RequestParam Integer productId,
             @RequestParam Integer quantity) throws Exception {
         logger.info("Add product request for product {} to cart {}", productId, cartId);
-        Cart cart = shoppingCartService.addProduct(cartId, productId, quantity);
+        CartEntity cart = shoppingCartService.addProduct(cartId, productId, quantity);
         logger.info(environment.getProperty("Controller.ADDED_NEW_CART"));
-        return new ResponseEntity<Cart>(cart, HttpStatus.OK);
+        return new ResponseEntity<CartEntity>(cart, HttpStatus.OK);
     }
 
 }
