@@ -30,7 +30,7 @@ public class ShoppingCartService {
     Logger logger = LoggerFactory.getLogger(this.getClass());
 
     // Calculate total price
-    private double calculatePrice(Cart cart) {
+    public double calculatePrice(Cart cart) {
         double price = 0;
         for (ProductEntity product : cart.getProducts()) {
             price += product.getFinalPrice();

@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.junit.Rule;
 import org.junit.jupiter.api.Test;
@@ -17,15 +18,19 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import com.ecommerce.controllers.AuthController;
 import com.ecommerce.controllers.ProductController;
+import com.ecommerce.controllers.ShoppingCartController;
 import com.ecommerce.dao.CommerceDAO;
 import com.ecommerce.entities.ProductEntity;
+import com.ecommerce.models.Cart;
 import com.ecommerce.models.Product;
 import com.ecommerce.models.User;
 import com.ecommerce.models.UserKind;
 import com.ecommerce.repositories.ProductRepository;
+import com.ecommerce.repositories.ShoppingCartRepository;
 import com.ecommerce.services.AuthService;
 import com.ecommerce.services.AuthServiceImpl;
 import com.ecommerce.services.ProductService;
+import com.ecommerce.services.ShoppingCartService;
 
 @RunWith(SpringRunner.class)
 // @SpringBootTest
@@ -36,18 +41,27 @@ class ProjectApplicationTests {
 
 	@Autowired
 	private ProductController productController;
+	
+	@Autowired
+	private ShoppingCartController shoppingCartController;
 
 	@Mock
 	CommerceDAO commerceDao;
 
 	@Mock
 	ProductRepository productRepository;
+	
+	@Mock
+	ShoppingCartRepository shoppingCartRepository;
 
 	@InjectMocks
 	AuthService authService = new AuthServiceImpl();
 
 	@InjectMocks
 	ProductService productService = new ProductService();
+	
+	@InjectMocks
+	ShoppingCartService shoppingCartService = new ShoppingCartService();
 
 	@SuppressWarnings("deprecation")
 	@Rule
@@ -291,5 +305,46 @@ class ProjectApplicationTests {
 		Iterable<ProductEntity> products = productService.getAllProducts();
 		
 		assertNotNull(products);
+	}
+	
+	@Test
+	public void totalPrice() {
+		Cart cart = new Cart();
+		
+		List<ProductEntity> products;
+		
+		ProductEntity product1 =  new ProductEntity();
+		
+		product1.setId(111);
+		product1.setName("Desk");
+		product1.setDescription("for office use");
+		product1.setPrice(400.0);
+		product1.setDiscount(0.05);
+		product1.setDeliveryCharges(20.0);
+		product1.setQuantityInInventory(100);
+		
+		ProductEntity product2 =  new ProductEntity();
+		
+		product2.setId(112);
+		product2.setName("Chair");
+		product2.setDescription("for office use");
+		product2.setPrice(200.0);
+		product2.setDiscount(0.10);
+		product2.setDeliveryCharges(15.0);
+		product2.setQuantityInInventory(100);
+		
+		cart.setDiscount(0);
+		
+		// 195 + 400
+		
+		
+		
+		double price = shoppingCartService.calculatePrice(cart);
+		
+		assertEquals(595, price, 0);
+	}
+	
+	public void createCart() {
+		
 	}
 }
