@@ -44,34 +44,34 @@ public class ProjectApplication {
 		
 		@Override
 	    protected void configure(HttpSecurity http) throws Exception {
-//	    	http
-//	    		.httpBasic()
-////	    	.and()
-////	    		.cors()
-//	    	.and()
-//	        	.authorizeRequests()
-//	        		.antMatchers(
-//        				"/index.html", 
-//        				"/", 
-//        				"/home",
-//        				"/login", 
-//        				"/shopper/home", 
-//        				"/registration"
-//	        		).permitAll()
-//	        		.antMatchers(HttpMethod.GET, "/auth/**", "/products/all/").permitAll()
-//	                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
-//	        		.anyRequest().authenticated()
-//	        .and()
-//	        	.csrf().disable();
+	    	http
+	    		.httpBasic()
+	    	.and()
+	    		.cors()
+	    	.and()
+	        	.authorizeRequests()
+	        		.antMatchers(
+        				"/index.html", 
+        				"/", 
+        				"/home",
+        				"/login", 
+        				"/shopper/home", 
+        				"/registration"
+	        		).permitAll()
+	        		.antMatchers(HttpMethod.GET, "/auth/**", "/products/all/").permitAll()
+	                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
+	        		.anyRequest().authenticated()
+	        .and()
+	        	.csrf().disable();
 	       
 	    	
-			http
-				.cors()
-			.and()
-				.authorizeRequests()
-		    		.anyRequest().authenticated()
-			 .and()
-	        	.csrf().disable();
+//			http
+//				.cors()
+//			.and()
+//				.authorizeRequests()
+//		    		.anyRequest().authenticated()
+//			 .and()
+//	        	.csrf().disable();
 	    }
 		
 		
