@@ -16,6 +16,10 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -34,50 +38,36 @@ public class ProjectApplication {
 	@EnableWebSecurity
 	public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-		@Autowired
-		public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-			auth.inMemoryAuthentication()
-				.withUser("customer@infosys.com").password("password").roles("USER")
-			.and()
-				.withUser("admin").password("admin").roles("USER", "ADMIN", "READER", "WRITER");
-		}
-		
+		@Bean
 		@Override
-	    protected void configure(HttpSecurity http) throws Exception {
-	    	http
-	    		.httpBasic()
-	    	.and()
-	    		.cors()
-	    	.and()
-	        	.authorizeRequests()
-	        		.antMatchers(
-        				"/index.html", 
-        				"/", 
-        				"/home",
-        				"/login", 
-        				"/shopper/home", 
-        				"/registration"
-	        		).permitAll()
-	        		.antMatchers(HttpMethod.GET, "/auth/**", "/products/all/").permitAll()
-	                .antMatchers(HttpMethod.POST, "/auth/**").permitAll()
-	        		.anyRequest().authenticated()
-	        .and()
-	        	.csrf().disable();
-	       
-	    	
-//			http
-//				.cors()
-//			.and()
-//				.authorizeRequests()
-//		    		.anyRequest().authenticated()
-//			 .and()
-//	        	.csrf().disable();
-	    }
-		
-		
-//		@Bean
-//		HeaderHttpSessionStrategy sessionStrategy() {
-//			return new HeaderHttpSessionStrategy();
-//		}
+		public UserDetailsService userDetailsService() {
+			UserDetails user = User.withDefaultPasswordEncoder().username("user@infosys.com").password("password")
+					.roles("USER").build();
+			UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("admin")
+					.roles("USER", "ADMIN", "READER", "WRITER").build();
+			return new InMemoryUserDetailsManager(user, admin);
+		}
+
+		@Override
+		protected void configure(HttpSecurity http) throws Exception {
+			http.httpBasic().and().cors().and().authorizeRequests()
+					.antMatchers("/index.html", "/", "/home", "/login", "/shopper/home", "/registration").permitAll()
+					.antMatchers(HttpMethod.GET, "/auth/**", "/products/**").permitAll()
+					.antMatchers(HttpMethod.POST, "/auth/**").permitAll().anyRequest().authenticated().and().csrf()
+					.disable();
+
+			// http
+			// .cors()
+			// .and()
+			// .authorizeRequests()
+			// .anyRequest().authenticated()
+			// .and()
+			// .csrf().disable();
+		}
+
+		// @Bean
+		// HeaderHttpSessionStrategy sessionStrategy() {
+		// return new HeaderHttpSessionStrategy();
+		// }
 	}
 }
