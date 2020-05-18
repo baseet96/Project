@@ -32,7 +32,7 @@ import com.ecommerce.services.AuthService;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600,
-	allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token", "content-type"})
+	allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token", "content-type", "authorization"})
 @RequestMapping("/auth")
 public class AuthController {
 	
