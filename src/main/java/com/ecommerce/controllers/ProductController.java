@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600,
-	allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token", "content-type"})
+	allowedHeaders={"x-auth-token", "x-requested-with", "x-xsrf-token", "content-type", "authorization"})
 @RequestMapping(path = "/products")
 public class ProductController {
 
