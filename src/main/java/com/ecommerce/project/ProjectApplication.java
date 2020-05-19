@@ -38,15 +38,15 @@ public class ProjectApplication {
 	@EnableWebSecurity
 	public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-		@Bean
-		@Override
-		public UserDetailsService userDetailsService() {
-			UserDetails user = User.withDefaultPasswordEncoder().username("user@infosys.com").password("password")
-					.roles("USER").build();
-			UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("admin")
-					.roles("USER", "ADMIN", "READER", "WRITER").build();
-			return new InMemoryUserDetailsManager(user, admin);
-		}
+//		@Bean
+//		@Override
+//		public UserDetailsService userDetailsService() {
+//			UserDetails user = User.withDefaultPasswordEncoder().username("user@infosys.com").password("password")
+//					.roles("USER").build();
+//			UserDetails admin = User.withDefaultPasswordEncoder().username("admin").password("admin")
+//					.roles("USER", "ADMIN", "READER", "WRITER").build();
+//			return new InMemoryUserDetailsManager(user, admin);
+//		}
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
@@ -55,14 +55,6 @@ public class ProjectApplication {
 					.antMatchers(HttpMethod.GET, "/auth/**", "/products/**").permitAll()
 					.antMatchers(HttpMethod.POST, "/auth/**").permitAll().anyRequest().authenticated().and().csrf()
 					.disable();
-
-			// http
-			// .cors()
-			// .and()
-			// .authorizeRequests()
-			// .anyRequest().authenticated()
-			// .and()
-			// .csrf().disable();
 		}
 
 		// @Bean
