@@ -35,6 +35,7 @@ public class ProjectApplication {
 		SpringApplication.run(ProjectApplication.class, args);
 	}
 
+	/*
 	@EnableWebSecurity
 	public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
@@ -62,4 +63,5 @@ public class ProjectApplication {
 		// return new HeaderHttpSessionStrategy();
 		// }
 	}
+	*/
 }
