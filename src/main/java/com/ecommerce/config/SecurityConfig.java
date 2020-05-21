@@ -27,4 +27,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated()
 		.and().csrf().disable();
 	}
+	
+// 	@Bean
+// 	HeaderHttpSessionStrategy sessionStrategy() {
+// 		return new HeaderHttpSessionStrategy();
+// 	}
 }
